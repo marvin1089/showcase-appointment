@@ -1,59 +1,132 @@
-# AppointmentApp4
+# 🚀 Showcase Appointment
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+A full-stack showcase application demonstrating modern web development using Angular, Spring Boot, PostgreSQL and Docker.
 
-## Development server
+The project was created as a personal portfolio to deepen practical software engineering skills and demonstrate modern full-stack application development.
 
-To start a local development server, run:
+The angular frontend is the first section of the online udemy-course "Complete Angular Course 2025 - Master Angular in only 6 days"
+
+Link (for replicating): https://www.udemy.com/course/complete-angular-14-course-learn-frontend-development/learn/lecture/39162312#overview
+
+---
+
+## 🏗️ Architecture
+
+The application follows a layered full-stack architecture:
+
+```text
+Browser
+   │
+Angular Frontend
+   │ REST API
+Spring Boot Backend
+   │
+PostgreSQL Database
+```
+
+The complete architecture documentation is available in the `docs` folder.
+
+---
+
+## ⚙️ Technology Stack
+
+| Technology | Purpose |
+|------------|---------|
+| Angular | Frontend |
+| Spring Boot | Backend REST API |
+| Java | Backend Development |
+| PostgreSQL | Database |
+| Docker | Containerization |
+| Maven | Dependency Management |
+| Git | Version Control |
+
+## ✨ Features
+
+Current implementation:
+
+- Angular frontend application
+- Spring Boot REST API
+- PostgreSQL database integration
+- Docker Compose environment
+- Layered backend architecture
+- Git version control
+- Architecture and project documentation
+
+Planned extensions:
+
+- Persistent appointment management
+- CRUD operations
+- Input validation
+- Exception handling
+- Unit and integration tests
+- Authentication & authorization
+- CI/CD pipeline
+
+
+---
+
+## 📁 Project Structure
+
+showcase-appointment/
+│
+├── backend/
+├── database/
+├── docs/
+├── src/
+├── compose.yaml
+└── README.md
+
+---
+
+## 🚀 Getting Started
+
+### Clone the repository
 
 ```bash
+git clone https://github.com/marvin1089/showcase-appointment.git
+```
+
+### Start the database
+
+```bash
+docker compose up -d
+```
+
+### Start the backend
+
+```bash
+cd backend/appointment-api
+mvn spring-boot:run
+```
+
+### Start the frontend
+
+```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The Angular application is available at:
 
-## Code scaffolding
+http://localhost:4200
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+The Spring Boot REST API is available at:
 
-```bash
-ng generate component component-name
-```
+http://localhost:8080
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 📚 Documentation
 
-## Building
+Additional project documentation can be found in the `docs` folder.
 
-To build the project run:
+- Architecture Overview
+- High-Level Project Overview
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 👨‍💻 About
 
-## Running unit tests
+This repository is part of my continuous software engineering learning journey.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+My professional background is in Business Analysis and Test Management within the financial sector. This project demonstrates practical experience in modern full-stack application development using Angular, Spring Boot, PostgreSQL and Docker.
