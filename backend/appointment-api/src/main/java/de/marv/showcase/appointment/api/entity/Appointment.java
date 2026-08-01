@@ -26,8 +26,28 @@ public class Appointment {
         this.appointmentDate = appointmentDate;
     }
 
-
+    public Long getId() {
+    return id;
 }
 
+public void setId(Long id) {
+    this.id = id;
+}
 
+public String getTitle() {
+    return title;
+}
 
+public void setTitle(String title) {
+    this.title = title;
+}
+
+public LocalDate getAppointmentDate() {
+    return appointmentDate;
+}
+
+public void setAppointmentDate(LocalDate appointmentDate) {
+    this.appointmentDate = appointmentDate;
+}
+
+}

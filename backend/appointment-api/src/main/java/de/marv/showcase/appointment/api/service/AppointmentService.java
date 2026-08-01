@@ -8,7 +8,6 @@ import de.marv.showcase.appointment.api.entity.Appointment;
 import de.marv.showcase.appointment.api.repository.AppointmentRepository;
 
 @Service
-
 public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
@@ -19,5 +18,9 @@ public class AppointmentService {
 
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
+    }
+
+    public Appointment createAppointment(Appointment appointment) {
+        return appointmentRepository.save(appointment);
     }
 }
