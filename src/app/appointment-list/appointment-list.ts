@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Appointment } from '../models/appointment';
+import { AppointmentService } from '../services/appointment';
 
 @Component({
   selector: 'app-appointment-list',
@@ -10,56 +12,56 @@ import { Appointment } from '../models/appointment';
 export class AppointmentList implements OnInit {
 
   newAppointmentTitle: string = '';
-  newAppointmentDate: Date = new Date();
+  newAppointmentDate: string = '';
 
   appointments: Appointment[] = [];
 
+  constructor(
+    private appointmentService: AppointmentService
+  ) {}
+
   ngOnInit(): void {
-
-    if (typeof window !== 'undefined') {
-
-      const savedAppointments = localStorage.getItem('appointments');
-
-      this.appointments = savedAppointments
-        ? JSON.parse(savedAppointments)
-        : [];
-    }
+    this.loadAppointments();
   }
 
-  addAppointment() {
+  loadAppointments(): void {
+    this.appointmentService.getAppointments().subscribe({
+      next: (appointments) => {
+        this.appointments = appointments;
+      },
+      error: (error) => {
+        console.error('Appointments could not be loaded:', error);
+      }
+    });
+  }
 
-    if (this.newAppointmentTitle.trim().length === 0) {
+  addAppointment(): void {
+    if (
+      this.newAppointmentTitle.trim().length === 0 ||
+      this.newAppointmentDate.length === 0
+    ) {
       return;
     }
 
     const newAppointment: Appointment = {
-      id: Date.now(),
       title: this.newAppointmentTitle,
-      date: this.newAppointmentDate
+      appointmentDate: this.newAppointmentDate
     };
 
-    this.appointments.push(newAppointment);
+    this.appointmentService.createAppointment(newAppointment).subscribe({
+      next: (createdAppointment) => {
+        this.appointments.push(createdAppointment);
 
-    this.newAppointmentTitle = '';
-    this.newAppointmentDate = new Date();
-
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(
-        'appointments',
-        JSON.stringify(this.appointments)
-      );
-    }
+        this.newAppointmentTitle = '';
+        this.newAppointmentDate = '';
+      },
+      error: (error) => {
+        console.error('Appointment could not be created:', error);
+      }
+    });
   }
 
-  deleteAppointment(index: number) {
-
+  deleteAppointment(index: number): void {
     this.appointments.splice(index, 1);
-
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(
-        'appointments',
-        JSON.stringify(this.appointments)
-      );
-    }
   }
 }
