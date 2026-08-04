@@ -61,7 +61,29 @@ export class AppointmentList implements OnInit {
     });
   }
 
-  deleteAppointment(index: number): void {
-    this.appointments.splice(index, 1);
+deleteAppointment(index: number): void {
+
+  const appointment = this.appointments[index];
+
+  if (appointment.id === undefined) {
+    return;
   }
+
+  this.appointmentService.deleteAppointment(appointment.id).subscribe({
+
+    next: () => {
+
+      this.appointments.splice(index, 1);
+
+    },
+
+    error: (error) => {
+
+      console.error('Appointment could not be deleted:', error);
+
+    }
+
+  });
+
+}
 }
