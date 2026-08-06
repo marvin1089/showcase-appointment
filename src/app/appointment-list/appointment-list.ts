@@ -50,7 +50,10 @@ export class AppointmentList implements OnInit {
 
     this.appointmentService.createAppointment(newAppointment).subscribe({
       next: (createdAppointment) => {
-        this.appointments.push(createdAppointment);
+        this.appointments = [
+          ...this.appointments,
+          createdAppointment
+        ];
 
         this.newAppointmentTitle = '';
         this.newAppointmentDate = '';
@@ -61,29 +64,20 @@ export class AppointmentList implements OnInit {
     });
   }
 
-deleteAppointment(index: number): void {
-
-  const appointment = this.appointments[index];
-
-  if (appointment.id === undefined) {
-    return;
-  }
-
-  this.appointmentService.deleteAppointment(appointment.id).subscribe({
-
-    next: () => {
-
-      this.appointments.splice(index, 1);
-
-    },
-
-    error: (error) => {
-
-      console.error('Appointment could not be deleted:', error);
-
+  deleteAppointment(appointment: Appointment): void {
+    if (appointment.id === undefined) {
+      return;
     }
 
-  });
-
-}
+    this.appointmentService.deleteAppointment(appointment.id).subscribe({
+      next: () => {
+        this.appointments = this.appointments.filter(
+          currentAppointment => currentAppointment.id !== appointment.id
+        );
+      },
+      error: (error) => {
+        console.error('Appointment could not be deleted:', error);
+      }
+    });
+  }
 }
